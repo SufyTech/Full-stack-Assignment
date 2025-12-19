@@ -21,8 +21,12 @@ const bookingSchema = new mongoose.Schema({
   totalPrice: Number,
   status: {
     type: String,
-    enum: ["confirmed", "cancelled"],
+    enum: ["confirmed", "cancelled", "waitlisted"], // added waitlisted
     default: "confirmed",
+  },
+  priority: {
+    type: Number, // for waitlist ordering: lower = earlier
+    default: 0,
   },
 });
 
