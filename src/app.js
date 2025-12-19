@@ -11,25 +11,10 @@ const waitlistRoutes = require("./routes/waitlistRoutes");
 
 const app = express();
 
-// Allowed origins for CORS
-const allowedOrigins = [
-  "http://localhost:3000", // Local development
-  "https://fullstacktask-theta.vercel.app", // Your deployed frontend
-];
-
-// CORS middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman or server-to-server)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   })
 );
 
